@@ -67,7 +67,7 @@ class Homestead
 	if settings.has_key?("databases")
       settings["databases"].each do |db|
         config.vm.provision "shell" do |s|
-            s.inline = "mysql -u root -p$1 -e \"CREATE DATABASE $2\""
+            s.inline = "mysql -u root -p$1 -e \"CREATE DATABASE IF NOT EXISTS $2\""
             s.args = [settings["dbrootpass"], db["db"]]
         end
       end
